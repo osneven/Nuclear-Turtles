@@ -46,7 +46,7 @@ public class Level : MonoBehaviour {
 		return waypoints[0];
 	}
 	public bool IsFinalWaypoint(Vector2 waypoint) {
-		return false;//waypoint == waypoints[waypoints.Length - 1];
+		return waypoint == waypoints[waypoints.Length - 1];
 	}
 	public bool IsOnWaypoint(Vector2 point, Vector2 waypoint, float error) {
 		float r = Mathf.Sqrt(Mathf.Pow(waypoint.x-point.x, 2) + Mathf.Pow(waypoint.y-point.y, 2));
