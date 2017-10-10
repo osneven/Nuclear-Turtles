@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Level : MonoBehaviour {
 
 	private Vector2[] waypoints;
+	private Vector2 start;
 
 	// Use this for initialization
 	void Start () {
 
 		// Get the waypoints
 		waypoints = FindWaypoins();
-		
+
+		// Get the start point
+		start = GameObject.Find("start").transform.position;
 	}
 	
 	// Update is called once per frame
@@ -19,9 +23,9 @@ public class Level : MonoBehaviour {
 
 	private Vector2[] FindWaypoins() {
 
-		// Get all waypoints
-		GameObject[] waypointObjects = GameObject.FindGameObjectsWithTag("Waypoint");
-
+		// Get all waypoints sorted by name
+		GameObject[] waypointObjects = GameObject.FindGameObjectsWithTag("Waypoint").OrderBy(go => go.name).ToArray();
+		
 		// Get all the positions
 		Vector2[] waypoints = new Vector2[waypointObjects.Length];
 		for (int i = 0; i < waypointObjects.Length; i ++) {
@@ -39,7 +43,13 @@ public class Level : MonoBehaviour {
 		return waypoints[0];
 	}
 	public bool IsFinalWaypoint(Vector2 waypoint) {
-		return waypoint == waypoints[waypoints.Length - 1];
+		return false;//waypoint == waypoints[waypoints.Length - 1];
 	}
-
+	public bool IsOnWaypoint(Vector2 point, Vector2 waypoint, float error) {
+		float r = Mathf.Sqrt(Mathf.Pow(waypoint.x-point.x, 2) + Mathf.Pow(waypoint.y-point.y, 2));
+		return r <= error;
+	}
+	public Vector2 StartPoint() {
+		return start;
+	}
 }
