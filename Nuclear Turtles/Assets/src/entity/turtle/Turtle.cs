@@ -45,7 +45,7 @@ public class Turtle : Entity {
 			}
 
 			// Turn the velocity towards the new waypoint
-			velocity = Vector2.Angle()
+			velocity = Vector2.Angle(oldWaypoint, waypoint);
 		}
 	}
 }
