@@ -6,17 +6,28 @@ using UnityEngine;
 public class Turtle : Entity {
 
 	private Level level;
+	private Player player;
 	public float speed;
 	private int waypointIndex;
 	private Vector2 velocity, waypoint;
 	
-	public Turtle(Vector2 position) : base(position) {}
+	public Turtle(Vector2 position, float speed) : base(position) {
+		this.speed = speed;
+	}
 
 	public override void Start() {
+		GameObject levelObject = GameObject.Find("level");
+
 		// Get the level script from the level object
-		level = GameObject.Find("level").GetComponent<Level>();
+		level = levelObject.GetComponent<Level>();
 		waypoint = level.FirstWaypoint(); // Get the first waypoint
 		waypointIndex = 0; // Set the matching waypoint index
+
+		// Get the player script
+		player = levelObject.GetComponent<Player>();
+
+		// Place the the turtle in the start point
+		this.transform.position = level.StartPoint();
 
 		//TODO: REMOVE DEBUG TURTLE SPEED
 		speed = .1f;
@@ -38,10 +49,11 @@ public class Turtle : Entity {
 		// Check if waypoint has been reached
 		if (level.IsOnWaypoint(this.transform.position, waypoint, .1f)) {
 			
-			// Check if it's the last waypoint
+			// Check if it's the last waypoint, if so, deacrease the player's health by 1, 
+			// and destory this turtle
 			if (level.IsFinalWaypoint(waypoint)) {
-				// TODO: DECREASE HP OF THE PLAYER
-				Debug.Log("DEBUG: HP LOSS");
+				player.DecreaseHealth();
+				Destroy(gameObject);
 			}
 
 			// Otherwise, get the next waypoint
