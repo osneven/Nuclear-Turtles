@@ -10,7 +10,7 @@ public class Level : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		
 		// Get the waypoints
 		waypoints = FindWaypoins();
 
@@ -25,7 +25,7 @@ public class Level : MonoBehaviour {
 
 		// Get all waypoints sorted by name
 		GameObject[] waypointObjects = GameObject.FindGameObjectsWithTag("Waypoint").OrderBy(go => go.name).ToArray();
-		
+
 		// Get all the positions
 		Vector2[] waypoints = new Vector2[waypointObjects.Length];
 		for (int i = 0; i < waypointObjects.Length; i ++) {
@@ -40,6 +40,9 @@ public class Level : MonoBehaviour {
 		return waypoints[index + 1];
 	}
 	public Vector2 FirstWaypoint() {
+		if (waypoints == null) {
+			Start();
+		}
 		return waypoints[0];
 	}
 	public bool IsFinalWaypoint(Vector2 waypoint) {
