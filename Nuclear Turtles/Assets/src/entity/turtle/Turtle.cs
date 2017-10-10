@@ -36,9 +36,6 @@ public class Turtle : Entity {
 	public override void Update() {
 		// Move the turtle
 		Move();
-
-		GameObject a = GameObject.Find("Main Camera");
-		a.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, a.transform.position.z);
 	}
 
 	private void Move() {
