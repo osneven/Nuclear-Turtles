@@ -78,6 +78,7 @@
     <Compile Include="Assets\src\entity\Entity.cs" />
     <Compile Include="Assets\src\entity\turret\Turret.cs" />
     <Compile Include="Assets\src\entity\turtle\Turtle.cs" />
+    <Compile Include="Assets\src\gameplay\Battle.cs" />
     <Compile Include="Assets\src\level\Level.cs" />
     <Compile Include="Assets\src\player\Player.cs" />
     <Compile Include="Assets\src\util\Vector.cs" />

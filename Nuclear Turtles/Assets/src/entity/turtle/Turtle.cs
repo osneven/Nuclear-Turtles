@@ -30,7 +30,7 @@ public class Turtle : Entity {
 		this.transform.position = level.StartPoint();
 
 		//TODO: REMOVE DEBUG TURTLE SPEED
-		speed = .1f;
+		//speed = .1f;
 	}
 
 	public override void Update() {
